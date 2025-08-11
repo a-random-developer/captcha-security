@@ -4,26 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Human Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #statusMessage {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: blue;
+        }
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <div id="statusMessage" style="margin-bottom: 10px; color: blue; font-size: 18px;">
-        Please wait while we check if you are not a bot...
+    <div id="statusMessage">Please verify you are not a bot...</div>
+
+    <!-- reCAPTCHA v2 checkbox -->
+    <div class="g-recaptcha"
+         data-sitekey="YOUR_V2_SITE_KEY"
+         data-callback="onVerified">
     </div>
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfwS6IrAAAAAN7AmmU6uWfgiIY6T4LbSYuzolW6"></script>
     <script>
-        window.addEventListener("load", function() {
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6LfwS6IrAAAAAN7AmmU6uWfgiIY6T4LbSYuzolW6', {action: 'page_load'}).then(function(token) {
-                    // Send 'token' to backend for verification
-                    // For now we simulate success after 1 second
-                    setTimeout(function() {
-                        document.getElementById("statusMessage").textContent = "✅ You are verified as human! Redirecting...";
-                        window.location.href = "main.html"; // Redirect to your main page
-                    }, 1000);
-                });
-            });
-        });
+        function onVerified(token) {
+            document.getElementById("statusMessage").textContent = "✅ Verified! Redirecting...";
+            setTimeout(function() {
+                window.location.href = "main.html"; // Redirect after success
+            }, 1000);
+        }
     </script>
 </body>
 </html>
