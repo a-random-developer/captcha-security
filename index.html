@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>reCAPTCHA v3 Example</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfwS6IrAAAAAN7AmmU6uWfgiIY6T4LbSYuzolW6"></script>
 </head>
 <body>
-    
+    <form id="demo-form" action="your-server-endpoint" method="POST">
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+        <button type="submit" id="submit-btn">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function (e) {
+            e.preventDefault(); // Stop default submit
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LfwS6IrAAAAAN7AmmU6uWfgiIY6T4LbSYuzolW6', { action: 'submit' })
+                .then(function (token) {
+                    document.getElementById('g-recaptcha-response').value = token;
+                
+                    document.getElementById('demo-form').submit();
+                });
+            });
+        });
+    </script>
 </body>
 </html>
