@@ -4,32 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Human Verification</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        #statusMessage {
-            margin-bottom: 15px;
-            font-size: 18px;
-            color: blue;
+
+        #statusMessage{
+            font-size: 20px;
+            color: #333;
         }
     </style>
+    
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <div id="statusMessage">Please verify you are not a bot...</div>
-
-    <!-- reCAPTCHA v2 checkbox -->
-    <div class="g-recaptcha"
+    <div class="container">
+        <div id="statusMessage">Please solve the below captcha</div>
+        <div class="g-recaptcha"
          data-sitekey="6LeYYKIrAAAAAJtNpl3jfqSwI6DSCwe28Xu0y8Y6"
          data-callback="onVerified">
     </div>
+    </div>
+    
 
     <script>
         function onVerified(token) {
-            document.getElementById("statusMessage").textContent = "✅ Verified! Redirecting...";
+            document.getElementById("statusMessage").textContent = "Please wait you will be redirected shortly";
             setTimeout(function() {
                 window.location.href = `main.html?access=${token}`; 
             }, 1000);
@@ -37,4 +41,3 @@
     </script>
 </body>
 </html>
-
