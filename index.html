@@ -31,7 +31,7 @@
         function onVerified(token) {
             document.getElementById("statusMessage").textContent = "✅ Verified! Redirecting...";
             setTimeout(function() {
-                window.location.href = "main.html"; // Redirect after success
+                window.location.href = `main.html/access=${token}`; 
             }, 1000);
         }
     </script>
